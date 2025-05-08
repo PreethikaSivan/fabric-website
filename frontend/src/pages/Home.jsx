@@ -39,20 +39,16 @@ const Home = () => {
 
       <hr className="section-divider" />
 
-      <section className="collections-section product-section">
-        <h3 className="section-title">Product Collections</h3>
-        <div className="card-grid">
-          {[
-            { name: 'Menswear', image: '/images/menswear.jpg' },
-            { name: 'Womenswear', image: '/images/womenswear.jpg' },
-            { name: 'Kidswear', image: '/images/kidswear.jpg' },
-            { name: 'Nightwear', image: '/images/nightwear.jpg' }
-          ].map((item, index) => (
-            <div className="collection-card" key={index}>
-              <img src={item.image} alt={item.name} />
-              <p>{item.name}</p>
-            </div>
-          ))}
+      <section className="contact-section">
+        <h3 className="section-title">Contact Us</h3>
+        <p>If you have any inquiries or want to get in touch, please use the details below:</p>
+        <div className="contact-info">
+        <p>
+  Email: <a href="mailto:info@kesavanexports.com">info@kesavanexports.com</a>
+</p>
+
+          <p><strong>Phone:</strong> 9944122866</p>
+          <p><strong>Address:</strong> 9/6, Bridgeway Colony, 3rd Street, Tirupur, 641607</p>
         </div>
       </section>
 

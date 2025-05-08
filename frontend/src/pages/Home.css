@@ -1,182 +1,195 @@
 /* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #fefefe;
-    color: #333;
-  }
-  
-  #root {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .home-container {
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-  
-  /* Header */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #111;
-    color: #fff;
-    height: 60px;
-  }
-  
-  .header h1 {
-    font-size: 1.6rem;
-    font-weight: 700;
-  }
-  
-  .auth-buttons {
-    display: flex;
-    gap: 1.2rem;
-  }
-  
-  .auth-buttons a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
-  }
-  
-  .auth-buttons a:hover {
-    color: #ff6600;
-  }
-  
-  /* Banner */
-  .banner {
-    position: relative;
-    background: url('/images/banner.jpg') no-repeat center/cover;
-    text-align: center;
-    padding: 4rem 1rem;
-    color: white;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-  }
-  
-  .banner::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.45); /* Dark overlay */
-    z-index: -1;
-  }
-  
-  .banner h2,
-  .banner p {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .banner h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .banner p {
-    font-size: 1.2rem;
-  }
-  
-  /* Section Divider */
-  .section-divider {
-    border: none;
-    height: 2px;
-    margin: 2rem auto;
-    width: 80%;
-    background: linear-gradient(to right, #ccc, #888, #ccc);
-  }
-  
-  /* Collections */
-  .collections-section {
-    padding: 3rem 2rem;
-    text-align: center;
-    background-color: #f8f8f8;
-  }
-  
-  .section-title {
-    font-size: 2.2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-  }
-  
-  .card-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-  }
-  
-  .collection-card {
-    background: white;
-    padding: 1rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    width: 180px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-  }
-  
-  .collection-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  }
-  
-  .collection-card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 0.75rem;
-  }
-  
-  .collection-card p {
-    font-size: 1rem;
-    font-weight: 500;
-  }
-  
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #111;
-    color: #fff;
-  }
-  
-  /* Fix Link styles inside collection cards */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fefefe;
+  color: #333;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.home-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #111;
+  color: #fff;
+  height: 60px;
+}
+
+.header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.auth-buttons a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.auth-buttons a:hover {
+  color: #ff6600;
+}
+
+/* Banner */
+.banner {
+  position: relative;
+  background: url('/images/banner.jpg') no-repeat center/cover;
+  text-align: center;
+  padding: 4rem 1rem;
+  color: white;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: -1;
+}
+
+.banner h2,
+.banner p {
+  position: relative;
+  z-index: 2;
+}
+
+.banner h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.banner p {
+  font-size: 1.2rem;
+}
+
+/* Section Divider */
+.section-divider {
+  border: none;
+  height: 2px;
+  margin: 2rem auto;
+  width: 80%;
+  background: linear-gradient(to right, #ccc, #888, #ccc);
+}
+
+/* Collections Section */
+.collections-section {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
 .collection-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 180px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
   text-decoration: none;
   color: inherit;
 }
 
+.collection-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.collection-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
 .collection-card p {
-  color: #333;
   font-size: 1rem;
   font-weight: 500;
-  text-decoration: none; /* Remove underline */
+  color: #333;
+  text-decoration: none;
 }
 
 .collection-card:hover p {
   color: #000;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 3rem 2rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.contact-section p {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.contact-info {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.contact-info p {
+  margin-bottom: 0.75rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #111;
+  color: #fff;
 }

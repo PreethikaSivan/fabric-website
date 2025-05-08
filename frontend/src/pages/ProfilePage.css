@@ -1,0 +1,120 @@
+/* ProfilePage.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Profile Page Layout */
+.profile-page {
+  padding: 0 20px; /* Add padding for left and right */
+  padding-top: 0; /* Remove any top padding causing extra space */
+  padding-bottom: 50px; /* Space for the footer */
+  min-height: calc(100vh - 50px); /* Ensure full height minus footer */
+  background-color: #f9f9f9;
+}
+
+/* Profile Card */
+.profile-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Profile Info */
+.profile-info {
+  margin-bottom: 20px;
+}
+
+.profile-info p {
+  margin: 8px 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+  background-color: #f76c28;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.edit-profile-btn:hover {
+  background-color: #e65d1d;
+}
+
+/* Orders Section */
+.orders-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+/* Order Cards */
+.order-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.order-card h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.order-card ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.order-card li {
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.order-card p {
+  margin: 10px 0;
+  color: #333;
+}
+
+/* Loading State */
+.profile-loading {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Footer Space Adjustment */
+.site-footer {
+  margin-top: 30px;
+  padding: 1.5rem 0;
+  width: 100%;
+  margin-top: auto; 
+}
+
+/* Navbar Styling */
+.main-navbar {
+  margin: 0; /* Remove any margin */
+  padding: 1rem 2rem; /* Remove any padding */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  
+}

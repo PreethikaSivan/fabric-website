@@ -1,12 +1,11 @@
 // src/pages/OrderPage.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./OrderPage.css";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const OrderPage = () => {
   const location = useLocation();
@@ -29,6 +28,16 @@ const OrderPage = () => {
     }))
   );
 
+  const [grandTotal, setGrandTotal] = useState(0);
+
+  useEffect(() => {
+    const total = customDetails.reduce((acc, detail, index) => {
+      const itemPrice = orderItems[index]?.price || 0;
+      return acc + itemPrice * detail.quantity;
+    }, 0);
+    setGrandTotal(total);
+  }, [customDetails, orderItems]);
+
   if (orderItems.length === 0) {
     return <p className="order-error">No order details found.</p>;
   }
@@ -40,7 +49,7 @@ const OrderPage = () => {
 
   const handleItemChange = (index, field, value) => {
     const updated = [...customDetails];
-    updated[index][field] = value;
+    updated[index][field] = field === "quantity" ? parseInt(value) || 1 : value;
     setCustomDetails(updated);
   };
 
@@ -61,7 +70,7 @@ const OrderPage = () => {
         fabricType: order.fabricType,
         name: order.name,
         price: order.price,
-        image: order.image,
+        image: order.imageURL || order.image || "/images/placeholder.png",
         quantity: customDetails[index].quantity,
         customizationNotes: customDetails[index].customizationNotes,
         referenceImageUrl: customDetails[index].referenceImageUrl,
@@ -79,14 +88,12 @@ const OrderPage = () => {
 
       if (res.ok) {
         toast.success("Order placed successfully!");
-
-        // Optional: Clear form or redirect
       } else {
         alert("Order failed. Try again.");
       }
     } catch (err) {
-        console.error("Error placing order:", error);
-        toast.error("Failed to place order. Please try again.");
+      console.error("Error placing order:", err);
+      toast.error("Failed to place order. Please try again.");
     }
   };
 
@@ -130,57 +137,75 @@ const OrderPage = () => {
             />
           </label>
 
-          {orderItems.map((order, index) => (
-            <div className="order-item-block" key={index}>
-              <h3>Item {index + 1}</h3>
-              <div className="order-content">
-                <div className="order-image-card">
-                  <img src={order.image} alt={order.name} className="order-image" />
-                </div>
-                <div className="order-details">
-                  <p><strong>Fabric:</strong> {order.fabricType}</p>
-                  <p><strong>Design:</strong> {order.name}</p>
-                  <p><strong>Price:</strong> {order.price}</p>
+          {orderItems.map((order, index) => {
+            const quantity = customDetails[index]?.quantity || 1;
+            const itemTotal = order.price * quantity;
 
-                  <label>
-                    Quantity (in meters):
-                    <input
-                      type="number"
-                      min="1"
-                      value={customDetails[index].quantity}
-                      onChange={(e) => handleItemChange(index, "quantity", e.target.value)}
-                      required
+            return (
+              <div className="order-item-block" key={index}>
+                <h3>Item {index + 1}</h3>
+                <div className="order-content">
+                  <div className="order-image-card">
+                    <img
+                      src={order.imageURL || order.image || "/images/placeholder.png"}
+                      alt={order.name}
+                      className="order-image"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/images/placeholder.png';
+                      }}
                     />
-                  </label>
-                  <label>
-                    Customization Notes:
-                    <textarea
-                      value={customDetails[index].customizationNotes}
-                      onChange={(e) =>
-                        handleItemChange(index, "customizationNotes", e.target.value)
-                      }
-                      placeholder="Describe what you want customized..."
-                    />
-                  </label>
-                  <label>
-                    Reference Image:
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => handleImageUpload(index, e.target.files[0])}
-                    />
-                  </label>
+                  </div>
+                  <div className="order-details">
+                    <p><strong>Fabric:</strong> {order.fabricType}</p>
+                    <p><strong>Design:</strong> {order.name}</p>
+                    <p><strong>Price per Meter:</strong> ₹{order.price}</p>
+
+                    <label>
+                      Quantity (in meters):
+                      <input
+                        type="number"
+                        min="1"
+                        value={quantity}
+                        onChange={(e) => handleItemChange(index, "quantity", e.target.value)}
+                        required
+                      />
+                    </label>
+                    <p><strong>Total:</strong> ₹{itemTotal}</p>
+
+                    <label>
+                      Customization Notes:
+                      <textarea
+                        value={customDetails[index].customizationNotes}
+                        onChange={(e) =>
+                          handleItemChange(index, "customizationNotes", e.target.value)
+                        }
+                        placeholder="Describe what you want customized..."
+                      />
+                    </label>
+                    <label>
+                      Reference Image:
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleImageUpload(index, e.target.files[0])}
+                      />
+                    </label>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
+
+          <div className="grand-total">
+            <h3>Grand Total: ₹{grandTotal}</h3>
+          </div>
 
           <button type="submit" className="place-order-btn">Confirm Order</button>
         </form>
       </div>
       <Footer />
       <ToastContainer position="top-center" autoClose={3000} />
-
     </>
   );
 };

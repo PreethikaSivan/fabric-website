@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
@@ -7,12 +6,15 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
+  // Handle changes in the form fields
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // Handle form submission for login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Make POST request to login API
     const res = await fetch('http://localhost:5000/api/client/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -24,17 +26,17 @@ const Login = () => {
     if (res.ok) {
       alert('Login successful');
 
-      localStorage.setItem('client', JSON.stringify(data.client));
+      // Store client details in localStorage
+      localStorage.setItem('client', JSON.stringify(data.client)); // Store the full client object, which includes `id`, `name`, `email`, etc.
 
-      
+      // Navigate based on user role
       if (formData.email.endsWith('@admin.com')) {
         navigate('/admin');
       } else {
         navigate('/');
       }
-      
     } else {
-      alert(data.message);
+      alert(data.message); // Show the error message from API
     }
   };
 
@@ -46,6 +48,8 @@ const Login = () => {
           <input
             name="email"
             placeholder="Email"
+            type="email"
+            value={formData.email}
             onChange={handleChange}
             required
           />
@@ -53,6 +57,7 @@ const Login = () => {
             name="password"
             type="password"
             placeholder="Password"
+            value={formData.password}
             onChange={handleChange}
             required
           />

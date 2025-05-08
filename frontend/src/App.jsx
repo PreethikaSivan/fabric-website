@@ -13,6 +13,7 @@ import Fabric from './pages/collections/Fabric';
 import FabricDesign from './pages/collections/FabricDesign';
 import CartPage from './pages/CartPage';
 import OrderPage from './pages/OrderPage';
+import ProfilePage from './pages/ProfilePage';
 
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -43,6 +44,7 @@ function App() {
         {/* Cart & Order */}
         <Route path="/cart" element={<CartPage />} />
         <Route path="/order" element={<OrderPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
         {/* Admin Routes */}
         <Route path="/admin/*" element={<AdminDashboard />}>
