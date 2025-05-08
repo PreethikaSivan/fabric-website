@@ -1,0 +1,67 @@
+.main-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #080808;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-links li a:hover {
+    color: #ff6600;
+  }
+  
+  .nav-search {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+  }
+  
+  .nav-search-input {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px 0 0 6px;
+    outline: none;
+    font-size: 14px;
+    width: 230px; /* made longer */
+    height: 40px;
+  }
+  
+  .nav-search-btn {
+    background-color: #fff;
+    border: none;
+    padding: 0 14px;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-search-btn svg {
+    color: orange;
+    font-size: 20px;
+  }
+  

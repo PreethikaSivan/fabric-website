@@ -1,0 +1,16 @@
+/* src/components/Footer.css */
+/* src/components/Footer.css */
+.site-footer {
+    background-color: #222;
+    color: #eee;
+    text-align: center;
+    padding: 1.5rem 0;
+    font-size: 0.95rem;
+    margin-top: 3rem;
+    width: 100%;
+  }
+  
+  .footer-content p {
+    margin: 0.4rem 0;
+  }
+  
