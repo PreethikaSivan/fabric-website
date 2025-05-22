@@ -13,7 +13,8 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${BASE_URL}/client/register`, {
+    const res = await fetch(`${BASE_URL}/api/client/register`, { 
+
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(formData),
