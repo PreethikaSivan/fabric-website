@@ -31,7 +31,7 @@ const Home = () => {
         <div className="auth-buttons">
           {client ? (
             <>
-              <span>{client.name}</span>
+              <span>Welcome, {client.name}</span>
               <button onClick={handleLogout} className="logout-btn">Logout</button>
             </>
           ) : (
