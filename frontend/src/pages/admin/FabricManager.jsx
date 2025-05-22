@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './FabricManager.css';
-
+import BASE_URL from '../../utils/api';
 const FabricsManager = () => {
   const [fabricName, setFabricName] = useState('');
   const [fabricCategory, setFabricCategory] = useState('');
@@ -19,10 +19,11 @@ const FabricsManager = () => {
     formData.append('image', fabricImage);
 
     try {
-      const res = await fetch('http://localhost:5000/api/products/add', {
-        method: 'POST',
-        body: formData,
-      });
+      const res = await fetch(`${BASE_URL}/api/products/add`, {
+  method: 'POST',
+  body: formData,
+});
+
 
       const data = await res.json();
       console.log('Response:', data);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
+import BASE_URL from '../utils/api';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -15,11 +16,11 @@ const Login = () => {
     e.preventDefault();
 
     // Make POST request to login API
-    const res = await fetch('http://localhost:5000/api/client/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+    const res = await fetch(`${BASE_URL}/api/client/login`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(formData),
+});
 
     const data = await res.json();
 

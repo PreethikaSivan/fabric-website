@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ManageOrders.css'; // You can style it nicely later
+import BASE_URL from '../../utils/api';
 
 const ManageOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -12,7 +13,7 @@ const ManageOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/orders'); // Adjust if needed
+      const res = await axios.get(`${BASE_URL}/api/orders`); // Adjust if needed
       setOrders(res.data);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -21,7 +22,7 @@ const ManageOrders = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      await axios.patch(`http://localhost:5000/api/orders/update-status/${orderId}`, { status: newStatus });
+      await axios.patch(`${BASE_URL}/api/orders/update-status/${orderId}`, { status: newStatus });
       fetchOrders(); // Refresh after update
     } catch (error) {
       console.error('Error updating order status:', error);

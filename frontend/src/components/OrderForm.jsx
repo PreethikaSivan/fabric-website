@@ -1,3 +1,5 @@
+import BASE_URL from '../../utils/api';
+
 function OrderForm() {
   const [clientName, setClientName] = useState("");
   const [address, setAddress] = useState("");
@@ -13,13 +15,14 @@ function OrderForm() {
         items: cartItems
       };
 
-      const response = await fetch("http://localhost:5000/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-      });
+     const response = await fetch(`${BASE_URL}/api/orders`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(orderData),
+});
+
 
       const result = await response.json();
       if (response.ok) {

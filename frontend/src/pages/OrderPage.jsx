@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import "./OrderPage.css";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import BASE_URL from '../utils/api';
 const OrderPage = () => {
   const location = useLocation();
   const { item, items } = location.state || {};
@@ -78,7 +78,7 @@ const OrderPage = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/orders", {
+      const res = await fetch(`${BASE_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

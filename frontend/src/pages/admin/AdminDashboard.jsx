@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import BASE_URL from '../../utils/api';
 import {
   PieChart,
   Pie,
@@ -33,7 +34,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/orders/dashboard-summary');
+       const res = await axios.get(`${BASE_URL}/api/orders/dashboard-summary`);
         setSummary(res.data);
       } catch (error) {
         console.error('Error fetching dashboard summary:', error);
@@ -59,9 +60,10 @@ const AdminDashboard = () => {
     return months[monthNumber - 1];
   }
 
-  const handleLogout = () => {
-    window.location.href = 'http://localhost:5173';
-  };
+ const handleLogout = () => {
+  window.location.href = '/'; // safer for deployment
+};
+
 
   return (
     <div className="admin-dashboard">

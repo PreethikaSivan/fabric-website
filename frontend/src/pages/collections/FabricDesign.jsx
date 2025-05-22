@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import Navbar from "../../components/Navbar";
+import BASE_URL from '../../utils/api';
 
 import "./FabricPage.css";
 
@@ -18,7 +19,8 @@ const FabricDesign = () => {
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${fabricName.toLowerCase()}`);
+        const response = await fetch(`${BASE_URL}/api/products/${fabricName.toLowerCase()}`);
+
         const data = await response.json();
         setDesigns(data);
       } catch (error) {
