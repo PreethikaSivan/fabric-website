@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import Navbar from "../../components/Navbar";
+
 import "./FabricPage.css";
 
 const fabricNames = ["Trending", "Cotton", "Silk", "Linen", "Printed", "Rayon"];

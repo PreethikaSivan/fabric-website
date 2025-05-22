@@ -1,15 +1,45 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  // State to store client info
+  const [client, setClient] = useState(null);
+
+  // On mount, check localStorage for client data
+  useEffect(() => {
+    const storedClient = localStorage.getItem('client');
+    if (storedClient) {
+      setClient(JSON.parse(storedClient));
+    }
+  }, []);
+
+  // Logout handler
+  const handleLogout = () => {
+    localStorage.removeItem('client');
+    setClient(null);
+    navigate('/'); // Redirect to home or login page
+  };
+
   return (
     <div className="home-container">
       <header className="header">
         <h1>Kesavan Exports</h1>
+
         <div className="auth-buttons">
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
+          {client ? (
+            <>
+              <span>{client.name}</span>
+              <button onClick={handleLogout} className="logout-btn">Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )}
         </div>
       </header>
 
@@ -43,10 +73,7 @@ const Home = () => {
         <h3 className="section-title">Contact Us</h3>
         <p>If you have any inquiries or want to get in touch, please use the details below:</p>
         <div className="contact-info">
-        <p>
-  Email: <a href="mailto:info@kesavanexports.com">info@kesavanexports.com</a>
-</p>
-
+          <p>Email: <a href="mailto:info@kesavanexports.com">info@kesavanexports.com</a></p>
           <p><strong>Phone:</strong> 9944122866</p>
           <p><strong>Address:</strong> 9/6, Bridgeway Colony, 3rd Street, Tirupur, 641607</p>
         </div>

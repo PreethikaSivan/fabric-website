@@ -256,3 +256,22 @@ body {
   cursor: not-allowed;
 }
 
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full viewport height */
+}
+
+.fabric-page {
+  flex: 1; /* take all remaining space pushing footer down */
+}
+
+.site-footer {
+  margin-top: 0; /* remove margin to avoid extra space */
+  background-color: #222;
+  color: #eee;
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.95rem;
+  width: 100%;
+}

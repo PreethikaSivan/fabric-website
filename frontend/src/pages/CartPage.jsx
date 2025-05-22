@@ -1,95 +1,101 @@
-import React from 'react';
-import { useCart } from "../context/CartContext";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar"; // ✅ Imported Navbar component
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { useCart } from "../context/CartContext";
+import "./CartPage.css";
 
 const CartPage = () => {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, updateCartItemQuantity, removeFromCart } = useCart();
   const navigate = useNavigate();
 
-  if (cartItems.length === 0) {
-    return (
-      <>
-        <Navbar /> {/* ✅ Navbar added */}
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
-          <h1>Your cart is empty.</h1>
-          <p>It looks like you haven't added anything to your cart yet.</p>
-        </div>
-      </>
-    );
-  }
-
-  const handleCheckout = (item) => {
-    navigate("/order", { state: { item } });
+  const handleCheckout = () => {
+    if (cartItems.length > 0) {
+      navigate("/order", { state: { items: cartItems } });
+    }
   };
 
-  const handleRemove = (item) => {
-    removeFromCart(item.name); // ✅ Remove from the cart
-  };
+  // Calculate total cart price
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
   return (
     <>
-      <Navbar /> {/* ✅ Navbar added */}
-      <div className="cart-page" style={{ padding: '2rem' }}>
-        <h1>Your Cart</h1>
-        <ul className="cart-items" style={{ listStyle: 'none', padding: 0 }}>
-          {cartItems.map((item, index) => (
-            <li key={index} className="cart-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-              <img
-                src={item.imageURL}
-                alt={item.name}
-                className="cart-item-image"
-                style={{ width: '100px', height: '100px', objectFit: 'cover', marginRight: '1rem' }}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = '/images/placeholder.png';
-                }}
-              />
-              <div className="cart-item-details" style={{ flex: 1 }}>
-                <span className="cart-item-name" style={{ fontWeight: 'bold' }}>{item.name}</span>
-                <br />
-                <span className="cart-item-price">₹{item.price}</span>
-              </div>
-              <button
-                onClick={() => handleCheckout(item)}
-                style={{
-                  padding: '0.5rem 1rem',
-                  backgroundColor: '#007bff',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  marginRight: '10px'
-                }}
-              >
-                Checkout
-              </button>
-              <button
-                onClick={() => handleRemove(item)}
-                style={{
-                  padding: '0.5rem 1rem',
-                  backgroundColor: '#dc3545',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer'
-                }}
-              >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
+      <Navbar />
+      <div className="cart-container">
+        <h2 className="cart-heading">Your Cart</h2>
+        {cartItems.length === 0 ? (
+          <p className="empty-cart">Your cart is empty.</p>
+        ) : (
+          <>
+            {cartItems.map((item, index) => (
+              <div key={index} className="cart-item">
+                <img
+                  src={item.imageURL}
+                  alt={item.name}
+                  className="cart-image"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/images/placeholder.png";
+                  }}
+                />
 
-        <div className="cart-summary" style={{ marginTop: '2rem' }}>
-          <h2>Cart Summary</h2>
-          <p>Total items: {cartItems.length}</p>
-          <p>
-            Total Price: ₹
-            {cartItems.reduce((total, item) => total + Number(item.price), 0).toFixed(2)}
-          </p>
-        </div>
+                <div className="cart-details">
+                  <h3>{item.name}</h3>
+                  <p>Category: {item.category}</p>
+                  {/* Show price multiplied by quantity */}
+                  <p>
+                    Price: ₹
+                    {item.price * item.quantity}
+                  </p>
+                </div>
+
+                <div className="cart-actions">
+                  <div className="quantity-controls">
+                    <button
+                      onClick={() =>
+                        updateCartItemQuantity(item.name, item.quantity - 1)
+                      }
+                      disabled={item.quantity <= 1}
+                      aria-label={`Decrease quantity of ${item.name}`}
+                    >
+                      -
+                    </button>
+                    <span>{item.quantity}</span>
+                    <button
+                      onClick={() =>
+                        updateCartItemQuantity(item.name, item.quantity + 1)
+                      }
+                      aria-label={`Increase quantity of ${item.name}`}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeFromCart(item.name)}
+                    aria-label={`Remove ${item.name} from cart`}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {/* Display total price */}
+            <div className="cart-total">
+              <h3>Total Price: ₹{totalPrice}</h3>
+            </div>
+
+            <button className="checkout-btn" onClick={handleCheckout}>
+              Proceed to Checkout
+            </button>
+          </>
+        )}
       </div>
+        <Footer />
     </>
   );
 };

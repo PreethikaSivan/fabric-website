@@ -1,10 +1,16 @@
-
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { FaSearch } from "react-icons/fa";
 
-const Navbar = ({ showSearch }) => {
+const Navbar = ({ showSearch, isLoggedIn, onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    if (onLogout) onLogout();  // clear auth/session
+    navigate("/");             // redirect to home page
+  };
+
   return (
     <nav className="main-navbar">
       <div className="nav-logo">Kesavan Exports</div>
@@ -21,6 +27,12 @@ const Navbar = ({ showSearch }) => {
         <li><Link to="/fabric/trending">Fabric Collections</Link></li>
         <li><Link to="/cart">Cart</Link></li>
         <li><Link to="/profile">Profile</Link></li>
+
+        {isLoggedIn && (
+          <li>
+            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          </li>
+        )}
       </ul>
     </nav>
   );

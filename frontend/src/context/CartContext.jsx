@@ -24,12 +24,15 @@ export const CartProvider = ({ children }) => {
     setCartItems((prev) => prev.filter((item) => item.name !== name));
   };
 
-  const updateQuantity = (index, delta) => {
-    setCartItems((prev) => {
-      const updated = [...prev];
-      updated[index].quantity = Math.max(1, updated[index].quantity + delta);
-      return updated;
-    });
+  // ✅ New function to update quantity using item name directly
+  const updateCartItemQuantity = (name, newQuantity) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.name === name
+          ? { ...item, quantity: Math.max(1, newQuantity) }
+          : item
+      )
+    );
   };
 
   const clearCart = () => {
@@ -38,7 +41,15 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateCartItemQuantity,
+        clearCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
