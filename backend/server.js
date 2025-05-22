@@ -23,6 +23,11 @@ app.use('/api/client', clientRoutes);
 app.use("/api/orders", orderRoutes);
 app.use('/api/products', productRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Kesavan Exports API is running...');
+});
+
+
 // MongoDB Connection
 mongoose.connect('mongodb+srv://preethikas22csd:preethi@cluster0.olfxb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => {
