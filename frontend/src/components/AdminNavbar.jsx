@@ -1,8 +1,14 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./AdminNavbar.css";
 
 function AdminNavbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // You can also clear any localStorage/session here if needed
+    navigate("/"); // Redirect to homepage
+  };
 
   return (
     <nav className="admin-navbar">
@@ -10,7 +16,7 @@ function AdminNavbar() {
         <li>
           <NavLink
             to="/admin"
-            className={({ isActive }) =>
+            className={() =>
               location.pathname === "/admin" ? "active" : ""
             }
           >
@@ -20,7 +26,7 @@ function AdminNavbar() {
         <li>
           <NavLink
             to="/admin/fabrics"
-            className={({ isActive }) =>
+            className={() =>
               location.pathname === "/admin/fabrics" ? "active" : ""
             }
           >
@@ -30,7 +36,7 @@ function AdminNavbar() {
         <li>
           <NavLink
             to="/admin/orders"
-            className={({ isActive }) =>
+            className={() =>
               location.pathname === "/admin/orders" ? "active" : ""
             }
           >
@@ -39,7 +45,7 @@ function AdminNavbar() {
         </li>
       </ul>
       <div className="logout-container">
-        <button onClick={() => (window.location.href = "http://localhost:5173")}>
+        <button onClick={handleLogout}>
           Logout
         </button>
       </div>
